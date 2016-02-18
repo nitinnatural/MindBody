@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         FSApiImplementation fsApiImplementation = new FSApiImplementation(this, bus);
         fsApiImplementation.getVenueNearMe();
+        fsApiImplementation.getVenueDetail();
     }
 
 
@@ -38,8 +39,15 @@ public class MainActivity extends AppCompatActivity {
         bus.unregister(this);
     }
 
+    /////////////////////////////////// Testing Api ////////////////////////////////////////////
+
     @Subscribe
     public void onResponse(Response response){
+        Toast.makeText(MainActivity.this, ""+response.getGroups().size(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Subscribe
+    public void onResponseVenueDetail(Response response){
         Toast.makeText(MainActivity.this, ""+response.getGroups().size(), Toast.LENGTH_SHORT).show();
     }
 

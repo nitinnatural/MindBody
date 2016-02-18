@@ -2,20 +2,19 @@ package com.androidyug.mindbody.data;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.androidyug.mindbody.model.venuelist.Group;
+
+import com.androidyug.mindbody.model.venuedetail.VenueDetailResponse;
+import com.androidyug.mindbody.model.venuelist.VenueListResponse;
 import com.androidyug.mindbody.utils.Constant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
+
 import com.squareup.okhttp.Response;
-import com.squareup.okhttp.ResponseBody;
 import com.squareup.otto.Bus;
-
 import java.io.IOException;
-
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -30,12 +29,14 @@ public class FSApiImplementation {
     Retrofit client;
     Bus bus;
     Context mContext;
+    ApiEndpointInterface foursquareService;
 
 
     public FSApiImplementation(Context ctx, Bus bus){
 
         this.mContext = ctx;
         this.bus = bus;
+
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -45,7 +46,7 @@ public class FSApiImplementation {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.interceptors().add(new Interceptor() {
             @Override
-            public Response intercept(Chain chain) throws IOException {
+            public com.squareup.okhttp.Response intercept(Chain chain) throws IOException {
                 Response response = chain.proceed(chain.request());
                 return response;
             }
@@ -55,21 +56,41 @@ public class FSApiImplementation {
         client = new Retrofit.Builder()
                 .baseUrl(Constant.API_ENDPOINT)
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create()) // gson
                 .build();
+
+        foursquareService = client.create(ApiEndpointInterface.class);
 
     }
 
 
     public void getVenueNearMe(){
-        ApiEndpointInterface foursquareService = client.create(ApiEndpointInterface.class);
-        Call<com.androidyug.mindbody.model.venuelist.Response> callFitnessCenter =  foursquareService.getFitnessCenter("12.95,72.59", 600, "gym / fitness", Constant.CLIENT_ID, Constant.CLIENT_SECRET, Constant.API_VERSION);
-        callFitnessCenter.enqueue(new Callback<com.androidyug.mindbody.model.venuelist.Response>() {
+
+        Call<VenueListResponse> callForVenuList =  foursquareService.getFitnessCenter("12.92,77.59", 1000, "gym / fitness center", Constant.CLIENT_ID, Constant.CLIENT_SECRET, Constant.API_VERSION);
+        callForVenuList.enqueue(new Callback<VenueListResponse>() {
             @Override
-            public void onResponse(retrofit.Response<com.androidyug.mindbody.model.venuelist.Response> response, Retrofit retrofit) {
+            public void onResponse(retrofit.Response<VenueListResponse> response, Retrofit retrofit) {
+                Log.d(LOG_TAG, ""+response.body().getResponse().getTotalResults());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
+    public void getVenueDetail(){
+        Call<VenueDetailResponse> callForVenueDetail = foursquareService.getVenueDetail("537cce8e498e6816a1eca488", Constant.CLIENT_ID, Constant.CLIENT_SECRET, Constant.API_VERSION);
+        callForVenueDetail.enqueue(new Callback<VenueDetailResponse>() {
+            @Override
+            public void onResponse(retrofit.Response<VenueDetailResponse> response, Retrofit retrofit) {
                 Log.d(LOG_TAG, "response from venue list "+ response.raw().message());
                 Log.d(LOG_TAG, "base url "+ client.baseUrl());
-//                bus.post(response.body());
+                Log.d(LOG_TAG, "" + response.body().getResponse().getVenue().getId());
             }
 
             @Override
@@ -77,7 +98,6 @@ public class FSApiImplementation {
                 Log.d(LOG_TAG, "retrofit failure: " + t.getMessage());
             }
         });
-
     }
 
 

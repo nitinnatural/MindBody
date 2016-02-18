@@ -1,9 +1,6 @@
 
 package com.androidyug.mindbody.model.venuedetail;
 
-import javax.annotation.Generated;
-
-@Generated("org.jsonschema2pojo")
 public class Response {
 
     private Venue venue;

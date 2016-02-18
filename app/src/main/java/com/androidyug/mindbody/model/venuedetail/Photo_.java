@@ -3,7 +3,7 @@ package com.androidyug.mindbody.model.venuedetail;
 
 import javax.annotation.Generated;
 
-@Generated("org.jsonschema2pojo")
+
 public class Photo_ {
 
     private String prefix;

@@ -3,9 +3,7 @@ package com.androidyug.mindbody.model.venuedetail;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
 
-@Generated("org.jsonschema2pojo")
 public class Location {
 
     private String address;
