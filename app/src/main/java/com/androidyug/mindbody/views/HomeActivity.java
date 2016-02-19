@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidyug.mindbody.R;
@@ -23,6 +24,7 @@ import com.androidyug.mindbody.model.venuelist.Item;
 import com.androidyug.mindbody.model.venuelist.Response;
 import com.androidyug.mindbody.model.venuelist.VenueListResponse;
 import com.androidyug.mindbody.service.GPSTacker;
+import com.androidyug.mindbody.utils.FontsFactory;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
@@ -43,21 +45,24 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.lv_venu_list)
     ListView lvVenuList;
 
+    @Bind(R.id.tv_title)
+    TextView tvTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         bus = new Bus(ThreadEnforcer.ANY);
-
+        init();
         requestVenusList();
-
-
-
-
-
     }
 
+
+
+    void init(){
+        tvTitle.setTypeface(FontsFactory.robotoCondensedBold(this));
+    }
 
 
     //"12.92,77.59"

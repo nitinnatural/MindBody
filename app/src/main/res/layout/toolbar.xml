@@ -11,6 +11,7 @@
         android:id="@+id/toolbar_back"
         android:layout_width="match_parent"
         android:background="@color/green_a200"
+        android:elevation="@dimen/space_small_4"
         android:layout_height="60dp">
 
         <LinearLayout
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_20"
                 android:text="MIND BODY"
+                android:textStyle="bold"
                 android:textColor="@android:color/white"
                 />
 

@@ -6,6 +6,6 @@ package com.androidyug.mindbody.utils;
 public class Utils {
 
     public static double toKm(int meter){
-        return meter/1000;
+        return meter/1000.00;
     }
 }

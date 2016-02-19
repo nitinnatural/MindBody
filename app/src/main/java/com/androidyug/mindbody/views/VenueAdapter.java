@@ -12,6 +12,7 @@ import com.androidyug.mindbody.model.venuelist.Group;
 import com.androidyug.mindbody.model.venuelist.Item;
 import com.androidyug.mindbody.model.venuelist.Location;
 import com.androidyug.mindbody.model.venuelist.Venue;
+import com.androidyug.mindbody.utils.FontsFactory;
 import com.androidyug.mindbody.utils.Utils;
 
 import org.w3c.dom.Text;
@@ -59,18 +60,27 @@ public class VenueAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(ctx).inflate(R.layout.row_venue_list, parent, false);
 
-            vh = new ViewHolder(convertView);
+            vh = new ViewHolder(convertView, ctx);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
 
+
+
+
+
         Venue venue = ((Item)getItem(position)).getVenue();
         Location location = venue.getLocation();
         vh.tvVenuName.setText(venue.getName());
-        vh.tvAddress.setText(location.getAddress());
+        if (location.getAddress()!=null){
+            vh.tvAddress.setText(location.getAddress());
+        } else {
+            vh.tvAddress.setVisibility(View.INVISIBLE);
+        }
+
         double distance = Utils.toKm(location.getDistance());
-        vh.tvDistance.setText(String.valueOf(distance) + "km");
+        vh.tvDistance.setText(String.valueOf(distance) + " km");
         if (venue.getRating()!=null) {
             vh.tvRating.setText("" + venue.getRating());
         } else {
@@ -95,8 +105,15 @@ public class VenueAdapter extends BaseAdapter {
         @Bind(R.id.tv_distance)
         TextView tvDistance;
 
-        ViewHolder(View view){
+        ViewHolder(View view, Context c){
             ButterKnife.bind(this, view);
+
+
+            // font style for textviews
+            tvVenuName.setTypeface(FontsFactory.robotoCondensedBold(c));
+            tvRating.setTypeface(FontsFactory.robotoCondensedBold(c));
+            tvAddress.setTypeface(FontsFactory.robotoLight(c));
+            tvDistance.setTypeface(FontsFactory.robotoLight(c));
         }
     }
 }
