@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.androidyug.mindbody.model.venuelist.Response;
 import com.androidyug.mindbody.model.venuelist.VenueListResponse;
 import com.androidyug.mindbody.service.GPSTacker;
 import com.androidyug.mindbody.utils.FontsFactory;
+import com.androidyug.mindbody.views.venuedetail.VenueDetailActivity;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
@@ -35,7 +37,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
 
@@ -62,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
     void init(){
         tvTitle.setTypeface(FontsFactory.robotoCondensedBold(this));
+        lvVenuList.setOnItemClickListener(this);
     }
 
 
@@ -102,7 +105,18 @@ public class HomeActivity extends AppCompatActivity {
         bus.unregister(this);
     }
 
-    /////////////////////////////////// Testing Api ////////////////////////////////////////////
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
+
+        Item item = (Item) parent.getAdapter().getItem(position);
+        Intent i = new Intent(this, VenueDetailActivity.class);
+        i.putExtra(VenueDetailActivity.EXTRA_INTENT_VENUE_DETAIL, item);
+        startActivity(i);
+    }
+
+    /////////////////////////////////// Api response ////////////////////////////////////////////
 
     @Subscribe
     public void onResponseVenuList(VenueListResponse response){

@@ -1,9 +1,11 @@
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
+
 /**
  * Created by IAMONE on 2/18/2016.
  */
-public class VenueListResponse {
+public class VenueListResponse  implements Serializable {
 
     private Meta meta;
     private Response response;

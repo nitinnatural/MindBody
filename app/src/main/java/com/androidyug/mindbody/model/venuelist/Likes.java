@@ -1,12 +1,13 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Likes {
+public class Likes implements Serializable {
 
     private Integer count;
     private List<Object> groups = new ArrayList<Object>();

@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.androidyug.mindbody.views.VenueDetailActivity">
+    tools:context=".views.venuedetail.VenueDetailActivity">
+
+    <include layout="@layout/toolbar_title">
+
+    </include>
+
+
 
 </LinearLayout>

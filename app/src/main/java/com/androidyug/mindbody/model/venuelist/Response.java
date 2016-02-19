@@ -1,11 +1,12 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
-public class Response {
+public class Response  implements Serializable {
 
     private SuggestedFilters suggestedFilters;
     private String headerLocation;
