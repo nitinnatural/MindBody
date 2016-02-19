@@ -1,10 +1,12 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Icon {
+public class Icon implements Serializable{
 
     private String prefix;
     private String suffix;

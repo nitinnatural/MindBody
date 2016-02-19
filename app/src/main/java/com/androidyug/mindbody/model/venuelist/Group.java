@@ -1,12 +1,13 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
 
-public class Group {
+public class Group implements Serializable {
 
     private String type;
     private String name;

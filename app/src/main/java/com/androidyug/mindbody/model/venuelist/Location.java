@@ -1,12 +1,13 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Location {
+public class Location implements Serializable {
 
     private String address;
     private Double lat;

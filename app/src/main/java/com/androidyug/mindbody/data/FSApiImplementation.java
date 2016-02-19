@@ -2,6 +2,7 @@ package com.androidyug.mindbody.data;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.androidyug.mindbody.model.venuedetail.VenueDetailResponse;
@@ -64,12 +65,18 @@ public class FSApiImplementation {
     }
 
 
-    public void getVenueNearMe(){
+    //"12.92,77.59"
+    public void getVenueNearMe(String latlong, int radius){
 
-        Call<VenueListResponse> callForVenuList =  foursquareService.getFitnessCenter("12.92,77.59", 1000, "gym / fitness center", Constant.CLIENT_ID, Constant.CLIENT_SECRET, Constant.API_VERSION);
+        Call<VenueListResponse> callForVenuList =  foursquareService.getFitnessCenter(latlong, radius, "gym / fitness center", Constant.CLIENT_ID, Constant.CLIENT_SECRET, Constant.API_VERSION);
         callForVenuList.enqueue(new Callback<VenueListResponse>() {
             @Override
             public void onResponse(retrofit.Response<VenueListResponse> response, Retrofit retrofit) {
+                if (response.isSuccess()){
+                    bus.post(response.body());
+                } else {
+                    Toast.makeText(mContext, "Fetching Error", Toast.LENGTH_LONG).show();
+                }
                 Log.d(LOG_TAG, ""+response.body().getResponse().getTotalResults());
             }
 

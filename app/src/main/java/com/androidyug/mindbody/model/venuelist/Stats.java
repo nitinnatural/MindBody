@@ -1,10 +1,12 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Stats {
+public class Stats implements Serializable{
 
     private Integer checkinsCount;
     private Integer usersCount;

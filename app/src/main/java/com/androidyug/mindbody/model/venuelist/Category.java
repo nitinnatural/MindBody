@@ -1,10 +1,12 @@
 
 package com.androidyug.mindbody.model.venuelist;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Category {
+public class Category implements Serializable {
 
     private String id;
     private String name;

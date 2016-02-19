@@ -15,6 +15,7 @@ public class Venue {
     private List<Category> categories = new ArrayList<Category>();
     private Boolean verified;
     private Stats stats;
+    private Double rating;
     private Boolean allowMenuUrlEdit;
     private Photos photos;
     private HereNow hereNow;
@@ -199,4 +200,12 @@ public class Venue {
         this.hereNow = hereNow;
     }
 
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 }

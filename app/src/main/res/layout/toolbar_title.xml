@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_back"
+        android:layout_width="match_parent"
+        android:background="@color/green_a200"
+        app:contentInsetStart="0dp"
+        android:layout_height="60dp">
+
+        <ImageButton
+            android:id="@+id/iv_back"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            style="@style/Base.Widget.AppCompat.ActionButton"
+            android:src="@drawable/ic_arrow_back_24dp"
+            android:scaleType="centerCrop"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_20"
+                android:text="Apple Fitness"
+                android:textColor="@android:color/white"
+                />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_12"
+                android:text="BTM Layout"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</merge>

@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bus = new Bus(ThreadEnforcer.ANY);
 
-        FSApiImplementation fsApiImplementation = new FSApiImplementation(this, bus);
-        fsApiImplementation.getVenueNearMe();
-        fsApiImplementation.getVenueDetail();
+//        FSApiImplementation fsApiImplementation = new FSApiImplementation(this, bus);
+//        fsApiImplementation.getVenueNearMe();
+//        fsApiImplementation.getVenueDetail();
     }
 
 
